@@ -79,11 +79,10 @@ $</p>
 \pi_\theta(\hat{y}_t \mid x, y_{&lt;t})\nabla_\theta \log \pi_\theta(\hat{y}_t \mid x, y_{&lt;t})
 = \nabla_\theta \pi_\theta(\hat{y}_t \mid x, y_{&lt;t}).
 $</p>
-<aside class="note">
-<strong>Why the log-derivative trick works</strong>
+<blockquote>
+<p><strong>Note: Why the log-derivative trick works</strong></p>
 <p>Let $p_\theta = \pi_\theta(\hat{y}_t \mid x, y_{&lt;t})$. By the chain rule, $\nabla_\theta \log p_\theta = (\nabla_\theta p_\theta)/p_\theta$. Multiplying both sides by $p_\theta$ gives the equation above.</p>
-</aside>
-
+</blockquote>
 <p>The first term then simplifies to:</p>
 <p>$
 \begin{aligned}
