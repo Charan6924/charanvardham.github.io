@@ -9,10 +9,12 @@ fetch(new URL(markdownPath, window.location.href)).then(response => {
   const expressions = [];
   const protectedMarkdown = markdown.replace(/\$\$[\s\S]*?\$\$|\$(?!\$)[^\n$]*\$/g, expression => {
     const token = `MATHTOKEN${expressions.length}END`;
-    expressions.push(expression);
+    expressions.push(expression.replace(/\n> ?/g, '\n'));
     return token;
   });
   let html = window.marked.parse(protectedMarkdown, { gfm: true });
+  html = html.replace(/<blockquote>\s*<p>\[!note\]- ([^\n]+)\n([\s\S]*?)<\/blockquote>/g,
+    (_, title, body) => `<details class="note"><summary>${title}</summary>\n<p>${body}</details>`);
   html = html.replace(/MATHTOKEN(\d+)END/g, (_, index) => expressions[Number(index)]
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
