@@ -13,8 +13,8 @@ fetch(new URL(markdownPath, window.location.href)).then(response => {
     return token;
   });
   let html = window.marked.parse(protectedMarkdown, { gfm: true });
-  html = html.replace(/<blockquote>\s*<p>\[!note\]- ([^\n]+)\n([\s\S]*?)<\/blockquote>/g,
-    (_, title, body) => `<details class="note"><summary>${title}</summary>\n<p>${body}</details>`);
+  html = html.replace(/<blockquote>\s*<p>\[!note\]-?\s+([^\n<]+)\n([\s\S]*?)<\/blockquote>/g,
+    (_, title, body) => `<aside class="note"><strong>${title}</strong><p>${body}</aside>`);
   html = html.replace(/MATHTOKEN(\d+)END/g, (_, index) => expressions[Number(index)]
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
